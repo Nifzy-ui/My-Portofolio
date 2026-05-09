@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project Design</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            background:
+            radial-gradient(circle at top left,#2563eb,transparent 30%),
+            radial-gradient(circle at bottom right,#0f172a,transparent 30%),
+            #020617;
+
+            min-height:100vh;
+
+            font-family:Arial;
+            color:white;
+
+            padding:40px 20px;
+
+            overflow-x:hidden;
+        }
+
+        .title{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .title h1{
+            font-size:40px;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .title p{
+            color:#cbd5e1;
+            font-size:16px;
+        }
+
+        /* NOTE */
+
+        .note-box{
+
+            margin:20px auto 0;
+
+            max-width:750px;
+
+            background:rgba(37,99,235,0.12);
+
+            border:1px solid rgba(96,165,250,0.3);
+
+            color:#dbeafe;
+
+            padding:14px 18px;
+
+            border-radius:16px;
+
+            backdrop-filter:blur(6px);
+
+            box-shadow:
+            0 0 20px rgba(37,99,235,0.15);
+
+            font-size:15px;
+
+            line-height:1.6;
+        }
+
+        .note-box i{
+            color:#60a5fa;
+            margin-right:8px;
+        }
+
+        /* GRID FOTO */
+
+        .gallery{
+            max-width:1200px;
+            margin:auto;
+
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+            gap:25px;
+        }
+
+        .photo-card{
+            background:rgba(15,23,42,0.9);
+
+            border-radius:20px;
+
+            overflow:hidden;
+
+            border:1px solid rgba(255,255,255,0.1);
+
+            box-shadow:0 0 20px rgba(0,0,0,0.4);
+
+            transition:0.3s;
+
+            height:100%;
+
+            display:flex;
+            flex-direction:column;
+        }
+
+        .photo-card:hover{
+            transform:translateY(-5px);
+        }
+
+        .photo-card img{
+            width:100%;
+            height:320px;
+            object-fit:cover;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .photo-card img:hover{
+            opacity:0.9;
+            transform:scale(1.02);
+        }
+
+        .content{
+            padding:20px;
+        }
+
+        .content h3{
+            margin-bottom:10px;
+            font-size:20px;
+        }
+
+        .content p{
+            color:#cbd5e1;
+            font-size:14px;
+            line-height:1.6;
+        }
+
+        .back-wrapper{
+            text-align:center;
+            margin-top:40px;
+        }
+
+        .btn-back{
+            display:inline-block;
+
+            padding:12px 20px;
+
+            background:#2563eb;
+
+            color:white;
+
+            text-decoration:none;
+
+            border-radius:12px;
+
+            transition:0.3s;
+        }
+
+        .btn-back:hover{
+            background:#1d4ed8;
+        }
+
+        /* POPUP FOTO */
+
+        .popup{
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            width:100%;
+            height:100%;
+
+            background:rgba(0,0,0,0.85);
+
+            backdrop-filter:blur(6px);
+
+            display:none;
+
+            justify-content:center;
+            align-items:center;
+
+            z-index:9999;
+
+            padding:20px;
+        }
+
+        /* CARD POPUP */
+
+        .popup-card{
+
+            width:100%;
+
+            max-width:950px;
+
+            background:#0f172a;
+
+            border-radius:25px;
+
+            padding:20px;
+
+            border:1px solid rgba(255,255,255,0.1);
+
+            box-shadow:
+            0 0 40px rgba(0,0,0,0.7),
+            0 0 20px rgba(37,99,235,0.2);
+
+            position:relative;
+
+            animation:popupShow 0.3s ease;
+        }
+
+        @keyframes popupShow{
+
+            from{
+                transform:scale(0.9);
+                opacity:0;
+            }
+
+            to{
+                transform:scale(1);
+                opacity:1;
+            }
+
+        }
+
+        /* FOTO DI POPUP */
+
+        .popup img{
+
+            width:100%;
+
+            max-height:80vh;
+
+            border-radius:15px;
+
+            object-fit:contain;
+
+            display:block;
+
+            background:black;
+        }
+
+        /* CLOSE BUTTON */
+
+        .close-btn{
+
+            position:absolute;
+
+            top:10px;
+            right:18px;
+
+            font-size:35px;
+
+            color:white;
+
+            cursor:pointer;
+
+            z-index:10;
+
+            transition:0.3s;
+        }
+
+        .close-btn:hover{
+            color:#60a5fa;
+            transform:rotate(90deg);
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="title">
+
+        <h1>
+            <i class="fa-solid fa-image"></i>
+            Project Design
+        </h1>
+
+        <p>
+            Berikut Ini Adalah Kumpulan Design Yg pernah Saya Buat
+        </p>
+
+        <!-- NOTE -->
+        <div class="note-box">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <strong>Note:</strong>
+            Foto desain di bawah ini hanyalah untuk
+            senang-senang semata.
+
+        </div>
+
+    </div>
+
+    <div class="gallery">
+
+        <!-- FOTO 1 -->
+
+        <div class="photo-card">
+
+            <img src="GFX 1.jpeg"
+            onclick="openPopup('GFX 1.jpeg')">
+
+            <div class="content">
+
+                <h3>Anime GFX</h3>
+
+                <p>                   
+                    Design anime aesthetic dengan efek glow dan color grading
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 2 -->
+
+        <div class="photo-card">
+
+            <img src="GFX 3.jpeg"
+            onclick="openPopup('GFX 3.jpeg')">
+
+            <div class="content">
+
+                <h3>Modern Dan Glow Edit</h3>
+
+                <p>
+                    Desain visual anime dengan kombinasi UI modern dan glow.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 3 -->
+
+        <div class="photo-card">
+
+            <img src="GFX.jpeg"
+            onclick="openPopup('GFX.jpeg')">
+
+            <div class="content">
+
+                <h3>Anime Modern Art</h3>
+
+                <p>
+                    Poster typography anime dengan style modern aesthetic.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 4 -->
+
+        <div class="photo-card">
+
+            <img src="GFX 4.jpeg"
+            onclick="openPopup('GFX 4.jpeg')">
+
+            <div class="content">
+
+                <h3>Dark Anime Art</h3>
+
+                <p>
+                    Desain dengan konsep visual dark mode anime style.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BACK -->
+
+    <div class="back-wrapper">
+
+        <a href="index.html" class="btn-back">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Kembali
+
+        </a>
+
+    </div>
+
+    <!-- POPUP FOTO -->
+
+    <div class="popup" id="popup">
+
+        <div class="popup-card">
+
+            <span class="close-btn"
+            onclick="closePopup()">
+
+                &times;
+
+            </span>
+
+            <img id="popupImage">
+
+        </div>
+
+    </div>
+
+    <script>
+
+        // popup foto
+
+        const popup =
+        document.getElementById("popup");
+
+        const popupImage =
+        document.getElementById("popupImage");
+
+        function openPopup(imageSrc){
+
+            popup.style.display = "flex";
+
+            popupImage.src = imageSrc;
+        }
+
+        function closePopup(){
+
+            popup.style.display = "none";
+
+            popupImage.src = "";
+        }
+
+        // close popup jika klik luar card
+
+        popup.addEventListener("click", function(e){
+
+            if(e.target === popup){
+
+                closePopup();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
